@@ -14,7 +14,7 @@ public class Task {
     @NotBlank(message = "Task's description must not be null!")
     private String description;
     private boolean done;
-//    private LocalDateTime deadline;
+    private LocalDateTime deadline;
 //    private LocalDateTime createdOn;
 //    private LocalDateTime updatedOn;
 
@@ -45,13 +45,13 @@ public class Task {
         this.done = done;
     }
 
-//    public LocalDateTime getDeadline() {
-//        return deadline;
-//    }
-//
-//    public void setDeadline(LocalDateTime deadline) {
-//        this.deadline = deadline;
-//    }
+    public LocalDateTime getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(LocalDateTime deadline) {
+        this.deadline = deadline;
+    }
 //
 //    @PrePersist
 //    void prePersist() {

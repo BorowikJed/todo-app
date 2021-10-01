@@ -5,6 +5,7 @@ import eu.kijora.todoapp.model.TaskRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -46,6 +47,18 @@ public class TaskController {
         } else {
             toUpdate.setId(id);
             taskRepository.save(toUpdate);
+            return ResponseEntity.noContent().build();
+        }
+    }
+
+    @Transactional
+    @PatchMapping("/tasks/{id}")
+    public ResponseEntity<?> toggleTask(@PathVariable int id) {
+        if (!taskRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        } else {
+            taskRepository.findById(id)
+                    .ifPresent(task -> task.setDone(!task.isDone()));
             return ResponseEntity.noContent().build();
         }
     }
