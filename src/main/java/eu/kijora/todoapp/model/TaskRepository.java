@@ -1,14 +1,17 @@
 package eu.kijora.todoapp.model;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TaskRepository {
 
     List<Task> findAll();
 
-    Task getById(Integer integer);
+    Optional<Task> findById(int id);
 
-    <S extends Task> S save(S entity);
+    Task save(Task entity);
+
+    boolean existsById(int id);
 
 }
 
