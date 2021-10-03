@@ -4,6 +4,8 @@ spring:
     path: '/console'
   datasource:
     url: 'jdbc:h2:file:C:\Users\Jedrzej\Documents\coding\todo-app\todo-db'
+    username: sa
+    password: password
   jpa:
     hibernate:
       ddl-auto: validate

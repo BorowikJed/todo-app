@@ -40,12 +40,14 @@ public class TaskController {
         return ResponseEntity.ok(taskRepository.save(task));
     }
 
-    @PutMapping("/tasks/{id}")
+    @PutMapping("/tasks/{id}") //the other option of saving save() besides @Transactional
     ResponseEntity<?> updateTask(@PathVariable int id, @RequestBody @Valid Task toUpdate) {
         if (!taskRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         } else {
-            toUpdate.setId(id);
+            taskRepository.findById(id)
+                    .ifPresent(task -> task.updateFrom(toUpdate));
+
             taskRepository.save(toUpdate);
             return ResponseEntity.noContent().build();
         }
