@@ -1,7 +1,8 @@
-package eu.kijora.todoapp.model;
+package eu.kijora.todoapp.adapter;
 
+import eu.kijora.todoapp.model.Task;
+import eu.kijora.todoapp.model.TaskRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.stereotype.Repository;
 
@@ -20,5 +21,7 @@ interface SqlTaskRepository extends TaskRepository, JpaRepository<Task, Integer>
 
     @RestResource(path = "done", rel = "done") //under /search resource
     List<Task> findByDoneIsTrue();
+
+    boolean existsByDoneIsFalseAndGroup_Id(Integer group_id);
 
 }

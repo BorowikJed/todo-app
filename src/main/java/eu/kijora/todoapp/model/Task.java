@@ -20,6 +20,13 @@ public class Task {
 //            @AttributeOverride(name="updatedOn", column = @Column(name="newNameWhichIWant"))
 //    })
     private AuditDateTimes audit = new AuditDateTimes();
+    @ManyToOne
+    @JoinColumn(name = "task_group_id") //using this table (id) we are joining (getting 1 task we also get his group?)
+    private TaskGroup group;
+
+    public TaskGroup getGroup() {
+        return group;
+    }
 
     public Task() {
     }
@@ -60,6 +67,7 @@ public class Task {
         description = source.description;
         done = source.done;
         deadline = source.deadline;
+        group = source.group;
     }
 
 }

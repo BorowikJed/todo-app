@@ -13,5 +13,7 @@ public interface TaskRepository {
 
     boolean existsById(int id);
 
+    boolean existsByDoneIsFalseAndGroup_Id(Integer group_id);
+
 }
 
