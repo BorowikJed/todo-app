@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tasks")
-public class Task extends BaseAudibleEntity {
+public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,6 +15,11 @@ public class Task extends BaseAudibleEntity {
     private String description;
     private boolean done;
     private LocalDateTime deadline;
+    @Embedded
+//    @AttributeOverrides({ //when I want to just change name
+//            @AttributeOverride(name="updatedOn", column = @Column(name="newNameWhichIWant"))
+//    })
+    private AuditDateTimes audit = new AuditDateTimes();
 
     public Task() {
     }
