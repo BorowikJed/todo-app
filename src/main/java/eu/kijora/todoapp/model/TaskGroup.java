@@ -21,6 +21,10 @@ public class TaskGroup {
     //mappedBy group because in "Task" class the field which maps this is "group"
     Set<Task> tasks;
 
+    @ManyToOne
+    @JoinColumn(name="project_id")
+    Project project;
+
 
     public TaskGroup() {
     }
