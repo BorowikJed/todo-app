@@ -1,4 +1,4 @@
-package eu.kijora.todoapp.model.special;
+package eu.kijora.todoapp.model.dto;
 
 import eu.kijora.todoapp.model.TaskGroup;
 

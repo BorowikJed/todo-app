@@ -4,8 +4,8 @@ import eu.kijora.todoapp.TaskConfigurationProperties;
 import eu.kijora.todoapp.model.TaskGroup;
 import eu.kijora.todoapp.model.TaskGroupRepository;
 import eu.kijora.todoapp.model.TaskRepository;
-import eu.kijora.todoapp.model.special.GroupReadModel;
-import eu.kijora.todoapp.model.special.GroupWriteModel;
+import eu.kijora.todoapp.model.dto.GroupReadModel;
+import eu.kijora.todoapp.model.dto.GroupWriteModel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

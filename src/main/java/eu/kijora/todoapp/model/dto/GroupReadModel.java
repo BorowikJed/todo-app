@@ -1,10 +1,9 @@
-package eu.kijora.todoapp.model.special;
+package eu.kijora.todoapp.model.dto;
 
 import eu.kijora.todoapp.model.Task;
 import eu.kijora.todoapp.model.TaskGroup;
 
 import java.time.LocalDateTime;
-import java.util.Comparator;
 import java.util.Set;
 import java.util.stream.Collectors;
 
