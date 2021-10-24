@@ -16,12 +16,10 @@ public class TaskGroupService {
 
     private TaskGroupRepository repository;
     private TaskRepository taskRepository;
-    private TaskConfigurationProperties properties;
 
-    public TaskGroupService(TaskGroupRepository repository, TaskRepository taskRepository, TaskConfigurationProperties properties) {
+    public TaskGroupService(TaskGroupRepository repository, TaskRepository taskRepository) {
         this.repository = repository;
         this.taskRepository = taskRepository;
-        this.properties = properties;
     }
 
     public GroupReadModel createGroup(GroupWriteModel source) {
@@ -41,6 +39,7 @@ public class TaskGroupService {
         } else {
             TaskGroup result = repository.findById(groupId).orElseThrow(() -> new IllegalArgumentException("Task group with given ID not found"));
             result.setDone(!result.isDone());
+            repository.save(result);
         }
 
     }

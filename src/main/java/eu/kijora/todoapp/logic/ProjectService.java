@@ -41,7 +41,8 @@ public class ProjectService {
                             )
                             .collect(Collectors.toSet())
                     );
-                    return result;
+                    result.setProject(project);
+                    return taskGroupRepository.save(result);
                 }).orElseThrow(() -> new IllegalArgumentException("Project with given ID not found"));
         return new GroupReadModel(taskGroup);
     }

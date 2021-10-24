@@ -17,12 +17,12 @@ public class TaskGroup {
     private boolean done;
     @Embedded
 //    private AuditDateTimes audit = new AuditDateTimes();
-    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "group") // cascade all - when delete group - delete all it's tasks
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "group") // cascade all - when delete group - delete all it's tasks
     //mappedBy group because in "Task" class the field which maps this is "group"
     Set<Task> tasks;
 
     @ManyToOne
-    @JoinColumn(name="project_id")
+    @JoinColumn(name = "project_id")
     Project project;
 
 
@@ -61,4 +61,11 @@ public class TaskGroup {
         this.tasks = tasks;
     }
 
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
 }

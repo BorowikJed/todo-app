@@ -13,11 +13,15 @@ public class Project {
     private int id;
     @NotBlank(message = "Task's description must not be null!")
     private String description;
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL) //because when e.g. deleting Project we want to delete all it's steps
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    //because when e.g. deleting Project we want to delete all it's steps
     private Set<ProjectStep> projectSteps;
     @OneToMany(mappedBy = "project") //with mappedBy it's bidirectional. It could be like a Product is not aware
     // it's in a Cart (uni) but if product has some Cart Id then it's bidrectional
     private Set<TaskGroup> taskGroups;
+
+    public Project() {
+    }
 
     public int getId() {
         return id;
@@ -47,7 +51,7 @@ public class Project {
         return taskGroups;
     }
 
-   void setTaskGroups(Set<TaskGroup> taskGroups) {
+    void setTaskGroups(Set<TaskGroup> taskGroups) {
         this.taskGroups = taskGroups;
     }
 }
