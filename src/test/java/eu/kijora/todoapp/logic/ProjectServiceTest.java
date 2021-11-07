@@ -27,7 +27,7 @@ class ProjectServiceTest {
         var mockGroupRepository = groupRepositoryReturning(true);
         var mockConfig = getConfigReturning(false);
 
-        var toTest = new ProjectService(null, mockGroupRepository, mockConfig);
+        var toTest = new ProjectService(null, mockGroupRepository, null, mockConfig);
 
         //when
         var exception = catchThrowable(() -> toTest.createGroup(LocalDateTime.now(), 1));
@@ -46,7 +46,7 @@ class ProjectServiceTest {
         var mockConfig = getConfigReturning(true);
         var mockRepository = mock(ProjectRepository.class);
         when(mockRepository.findById(anyInt())).thenReturn(Optional.empty());
-        var toTest = new ProjectService(mockRepository, null, mockConfig);
+        var toTest = new ProjectService(mockRepository, null, null, mockConfig);
 
         //when
         var exception = catchThrowable(() -> toTest.createGroup(LocalDateTime.now(), 1));
@@ -54,7 +54,7 @@ class ProjectServiceTest {
         //then
         assertThat(exception).
                 isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("given ID not found");
+                .hasMessageContaining("given id not found");
 
     }
 
@@ -67,7 +67,7 @@ class ProjectServiceTest {
         when(mockRepository.findById(anyInt())).thenReturn(Optional.empty());
         var mockGroupRepository = groupRepositoryReturning(false);
 
-        var toTest = new ProjectService(mockRepository, mockGroupRepository, mockConfig);
+        var toTest = new ProjectService(mockRepository, mockGroupRepository, null, mockConfig);
 
         //when
         var exception = catchThrowable(() -> toTest.createGroup(LocalDateTime.now(), 1));
@@ -75,7 +75,7 @@ class ProjectServiceTest {
         //then
         assertThat(exception).
                 isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("given ID not found");
+                .hasMessageContaining("given id not found");
 
     }
 
@@ -90,8 +90,9 @@ class ProjectServiceTest {
                 .thenReturn(Optional.of(project));
         var mockConfig = getConfigReturning(true);
         InMemoryGroupRepository inMemoryGroupRepo = inMemoryGroupRepository();
+        var serviceWithInMemRepo = new TaskGroupService(inMemoryGroupRepo, null);
         int countBeforeCall = inMemoryGroupRepo.count();
-        var toTest = new ProjectService(mockRepository, inMemoryGroupRepo, mockConfig);
+        var toTest = new ProjectService(mockRepository, inMemoryGroupRepo, serviceWithInMemRepo, mockConfig);
 
         //when
         GroupReadModel result = toTest.createGroup(today, 1);

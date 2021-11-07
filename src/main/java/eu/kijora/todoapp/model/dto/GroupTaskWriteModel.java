@@ -1,6 +1,7 @@
 package eu.kijora.todoapp.model.dto;
 
 import eu.kijora.todoapp.model.Task;
+import eu.kijora.todoapp.model.TaskGroup;
 
 import java.time.LocalDateTime;
 
@@ -24,8 +25,8 @@ public class GroupTaskWriteModel { //our DTO - we won't expose more than necessa
         this.deadline = deadline;
     }
 
-    public Task toTask(){
-        return new Task(description, deadline);
+    public Task toTask(TaskGroup group){
+        return new Task(description, deadline, group);
 
     }
 }

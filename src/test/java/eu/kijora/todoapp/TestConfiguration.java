@@ -65,6 +65,11 @@ public class TestConfiguration {
             public boolean existsByDoneIsFalseAndGroup_Id(Integer group_id) {
                 return false;
             }
+
+            @Override
+            public List<Task> findByDone(Boolean done) {
+                return null;
+            }
         };
 
     }
