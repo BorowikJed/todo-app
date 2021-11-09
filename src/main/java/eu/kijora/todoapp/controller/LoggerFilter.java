@@ -23,6 +23,8 @@ public class LoggerFilter implements Filter, Ordered {
             logger.info("[do Filter] " + httpRequest.getMethod() + " " + httpRequest.getRequestURI());
         }
         chain.doFilter(request, response); //here we have access to these classes and pass augmented one
+        logger.info("[do Filter 2]");
+
     }
 
     @Override
