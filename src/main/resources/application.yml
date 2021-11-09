@@ -12,3 +12,9 @@ spring:
 debug: true
 task:
   allowMultipleTasksFromTemplate: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

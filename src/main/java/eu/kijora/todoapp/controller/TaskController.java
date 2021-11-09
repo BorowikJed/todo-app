@@ -1,5 +1,6 @@
 package eu.kijora.todoapp.controller;
 
+import eu.kijora.todoapp.logic.TaskService;
 import eu.kijora.todoapp.model.Task;
 import eu.kijora.todoapp.model.TaskRepository;
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("/tasks")
@@ -28,6 +30,14 @@ public class TaskController {
         logger.warn("Exposing all the tasks!!!");
         return ResponseEntity.ok(taskRepository.findAll());
     }
+
+//    @GetMapping
+//    CompletableFuture<ResponseEntity<List<Task>>> readAllTasks() {
+//        logger.warn("Exposing all the tasks!!!");
+//        return taskService.findAllAsync().thenApply(ResponseEntity::ok);
+////        return ResponseEntity.ok(taskRepository.findAll()); //[preHandle] would run twice! We would need AsyncHandlerInterceptor
+//    }
+
 
     @GetMapping("/{id}")
     ResponseEntity<Task> readTask(@PathVariable int id) {
