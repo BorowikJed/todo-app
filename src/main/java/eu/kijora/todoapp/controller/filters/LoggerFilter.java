@@ -1,4 +1,4 @@
-package eu.kijora.todoapp.controller;
+package eu.kijora.todoapp.controller.filters;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

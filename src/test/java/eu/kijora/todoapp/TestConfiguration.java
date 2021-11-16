@@ -70,6 +70,11 @@ public class TestConfiguration {
             public List<Task> findByDone(Boolean done) {
                 return null;
             }
+
+            @Override
+            public List<Task> findAllByGroup_Id(Integer groupId) {
+                return null;
+            }
         };
 
     }

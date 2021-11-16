@@ -1,4 +1,4 @@
-package eu.kijora.todoapp.controller;
+package eu.kijora.todoapp.controller.filters;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

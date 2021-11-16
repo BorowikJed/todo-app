@@ -22,6 +22,5 @@ interface SqlTaskRepository extends TaskRepository, JpaRepository<Task, Integer>
     @RestResource(path = "done", rel = "done") //under /search resource
     List<Task> findByDoneIsTrue();
 
-    boolean existsByDoneIsFalseAndGroup_Id(Integer group_id);
-
+    List<Task> findAllByGroup_Id(Integer groupId);
 }
