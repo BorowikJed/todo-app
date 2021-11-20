@@ -1,5 +1,6 @@
 package eu.kijora.todoapp.model.dto;
 
+import eu.kijora.todoapp.model.Project;
 import eu.kijora.todoapp.model.TaskGroup;
 
 import java.util.Set;
@@ -9,12 +10,13 @@ public class GroupWriteModel {
     private String description;
     private Set<GroupTaskWriteModel> tasks;
 
-    public TaskGroup toGroup(){
+    public TaskGroup toGroup(Project project){
         var result = new TaskGroup();
         result.setDescription(description);
         result.setTasks(tasks.stream()
                 .map(groupTaskWriteModel -> groupTaskWriteModel.toTask(result))
                 .collect(Collectors.toSet()));
+        result.setProject(project);
         return result;
     }
 

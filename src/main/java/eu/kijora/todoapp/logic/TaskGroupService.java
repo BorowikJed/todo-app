@@ -1,6 +1,6 @@
 package eu.kijora.todoapp.logic;
 
-import eu.kijora.todoapp.TaskConfigurationProperties;
+import eu.kijora.todoapp.model.Project;
 import eu.kijora.todoapp.model.TaskGroup;
 import eu.kijora.todoapp.model.TaskGroupRepository;
 import eu.kijora.todoapp.model.TaskRepository;
@@ -23,7 +23,11 @@ public class TaskGroupService {
     }
 
     public GroupReadModel createGroup(GroupWriteModel source) {
-        TaskGroup saved = repository.save(source.toGroup());
+        return createGroup(source, null);
+    }
+
+    GroupReadModel createGroup(GroupWriteModel source, Project project) {
+        TaskGroup saved = repository.save(source.toGroup(project));
         return new GroupReadModel(saved);
     }
 
