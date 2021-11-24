@@ -5,11 +5,14 @@ import eu.kijora.todoapp.model.*;
 import eu.kijora.todoapp.model.dto.GroupReadModel;
 import eu.kijora.todoapp.model.dto.GroupTaskWriteModel;
 import eu.kijora.todoapp.model.dto.GroupWriteModel;
+import eu.kijora.todoapp.model.dto.ProjectWriteModel;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class ProjectService {
     private ProjectRepository projectRepository;
     private TaskGroupRepository taskGroupRepository;
@@ -27,8 +30,8 @@ public class ProjectService {
         return projectRepository.findAll();
     }
 
-    public Project save(final Project toSave) {
-        return projectRepository.save(toSave);
+    public Project save(final ProjectWriteModel toSave) {
+        return projectRepository.save(toSave.toProject());
     }
 
     public GroupReadModel createGroup(LocalDateTime deadline, int projectId) {

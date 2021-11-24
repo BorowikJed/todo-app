@@ -5,29 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo App: projects</title>
     <link rel="stylesheet" href="https://unpkg.com/awsm.css/dist/awsm.min.css">
+    <style>
+        .Bd{
+            border: solid 1px black;
+        }
+        .P\(0\){
+            padding: 0;
+        }
+        .P\(10px\){
+            padding: 10px;
+        }
+
+    </style>
 </head>
 <body>
-<!--/*@thymesVar id="project" type="eu.kijora.todoapp.model.dto.ProjectWriteModel"*/-->
 <main>
-    <form action="#" method="post" th:action="@{/projects}" th:object="${project}">
-        <!-- @ is only for URLs and $ for others-->
-        <fieldset>
+    <!--/*@thymesVar id="message" type="java.lang.String"*/-->
+    <h1 data-th-if="${message != null}" th:text="${message}"></h1>
+    <!-- possible to use <h1 data-th-if="${message !=null}"... Then it passes external validations-->
+    <dl th:each="project : ${projects}" class="Bd P(10px)">
+        <dt th:text="${project.description}">...</dt>
+        <dd>
+            <ul class="P(0)">
+                <li th:each="step : ${project.projectSteps}"
+                    th:text="|${step.description} (${step.daysToDeadline}) dni|"></li>
+            </ul>
+        </dd>
+    </dl>
+
+    <!-- @ is only for URLs and $ for others-->
+    <fieldset>
+        <!--/*@thymesVar id="project" type="eu.kijora.todoapp.model.dto.ProjectWriteModel"*/-->
+        <form action="#" method="post" th:action="@{/projects}" th:object="${project}">
             <legend>New project</legend>
             <label>Description
                 <input type="text" th:field="*{description}"/>
             </label>
-            <fieldset>
-                <legend>Step 1</legend>
+            <fieldset th:each="step,stepStats: *{steps}">
+                <legend th:text="|Step ${stepStats.index +1}|"></legend>
+                <!--with pipes |   | it's easier but also normal '+' concat possible-->
                 <label>Description
-                    <input type="text" th:field="*{steps[0].description}"/>
+                    <input type="text" th:field="*{steps[__${stepStats.index}__].description}"/>
+                    <!--double __ to escape being inside one query -->
                 </label>
                 <label>Days until the end of the project
-                    <input type="text" th:field="*{steps[0].daysToDeadline}"/>
+                    <input type="number" th:field="*{steps[__${stepStats.index}__].daysToDeadline}"/>
                 </label>
             </fieldset>
+            <div>
+                <button type="submit" name="addStep">+</button>
+            </div>
+            <p>
+                <button type="submit">Submit</button>
+                <button type="reset">Reset input</button>
+            </p>
+        </form>
+    </fieldset>
 
-        </fieldset>
-    </form>
 </main>
 
 </body>
