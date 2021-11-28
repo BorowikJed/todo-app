@@ -15,15 +15,15 @@ public class TaskGroup {
     @NotBlank(message = "Task groups's description must not be null!")
     private String description;
     private boolean done;
-    @Embedded
+//    @Embedded
 //    private AuditDateTimes audit = new AuditDateTimes();
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "group") // cascade all - when delete group - delete all it's tasks
     //mappedBy group because in "Task" class the field which maps this is "group"
-    Set<Task> tasks;
+    private Set<Task> tasks;
 
     @ManyToOne
     @JoinColumn(name = "project_id")
-    Project project;
+    private Project project;
 
 
     public TaskGroup() {

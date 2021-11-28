@@ -24,7 +24,7 @@ public class Task {
     @JoinColumn(name = "task_group_id") //using this table (id) we are joining (getting 1 task we also get his group?)
     private TaskGroup group;
 
-    public TaskGroup getGroup() {
+    TaskGroup getGroup() { //This getter, when was public, caused the tasks.html to fall into infinite recursion loop of Task <-> TaskGroup. Why??
         return group;
     }
 
