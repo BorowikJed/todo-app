@@ -12,7 +12,7 @@ import java.util.List;
 //for changing Set to List
 public class ProjectWriteModel {
 
-    @NotBlank(message = "Task's description must not be null!")
+    @NotBlank(message = "Project's description must not be null!")
     private String description;
     @Valid
     private List<ProjectStep> steps = new ArrayList<>();
